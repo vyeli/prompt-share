@@ -11,7 +11,7 @@ import { set } from 'mongoose'
 
 
 const Nav = () => {
-  const isUserLoggedIn = true
+  const {data: session} = useSession()
 
   const [providers, setProviders] = useState(null)
   const [toggleDropdown, setToggleDropdown] = useState(false)
@@ -34,10 +34,12 @@ const Nav = () => {
           alt="Promtshare Logo" />
         <p className='logo_text'>PromptShare</p>
       </Link>
+
+
       {/* Desktop navigation */}
-      {/* This div in small devices will be flex, in other cases will be hidden */}
+      {/* sm screen size and above will be flex, smaller than sm will be hidden */}
       <div className='sm:flex hidden'>
-        {isUserLoggedIn ? (
+        {session?.user ? (
           <div className='flex gap-3 md:gap-5'>
             <Link href="/create-prompt" className='black_btn'>
               Create Prompt
@@ -77,7 +79,7 @@ const Nav = () => {
 
       {/* Mobile navigation */}
       <div className='sm:hidden flex relative'>
-        {isUserLoggedIn ? (
+        {session?.user ? (
           <div className='flex'>
             <Image
               src="/assets/images/logo.svg"
