@@ -7,7 +7,6 @@ import {
   signIn, signOut, useSession,
   getProviders
 } from 'next-auth/react' // NextAuth.js functions to sign in and out
-import { set } from 'mongoose'
 
 
 const Nav = () => {

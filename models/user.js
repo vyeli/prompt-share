@@ -1,6 +1,6 @@
-import {Schema, model, models} from 'mongoose';
+import mongoose from 'mongoose';
 
-const userSchema = new Schema({
+const userSchema = new mongoose.Schema({
     email: {
         type: String,
         unique: [true, 'Email already exists'], // Unique index. If you specify `unique: true`, the second argument is a custom error message.
@@ -18,7 +18,8 @@ const userSchema = new Schema({
 });
 
 // If the model User has already been compiled, Mongoose will return it. Otherwise, Mongoose will compile the model and return it.
-const User = models.User || model('User', userSchema); 
+const User = mongoose.models && mongoose.models.User ? mongoose.models.User : mongoose.model('User', userSchema);
+
 export default User;
 // models is a dictionary of all your models, so you can use it to check if a model exists before defining it
 // this to prevent OverwriteModelError: Cannot overwrite `User` model once compiled.
