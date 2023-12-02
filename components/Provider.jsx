@@ -1,4 +1,4 @@
-"use client"
+"use client" // We need to use client because we are using browser functions
 
 import { SessionProvider} from "next-auth/react"
 

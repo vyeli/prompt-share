@@ -10,19 +10,20 @@ import {
 
 
 const Nav = () => {
-  const {data: session} = useSession()
+  const { data: session } = useSession()
 
   const [providers, setProviders] = useState(null)
   const [toggleDropdown, setToggleDropdown] = useState(false)
 
+  // Set up providers
   useEffect(() => {
-    const setProviders = async () => {
+    const setUpProviders = async () => {
       const response = await getProviders()
 
       setProviders(response)
     }
 
-    setProviders()
+    setUpProviders()
   }, [])
 
 
@@ -34,10 +35,10 @@ const Nav = () => {
         <p className='logo_text'>PromptShare</p>
       </Link>
 
-
       {/* Desktop navigation */}
       {/* sm screen size and above will be flex, smaller than sm will be hidden */}
       <div className='sm:flex hidden'>
+        {/* If it is logged in, will show the create and profile */}
         {session?.user ? (
           <div className='flex gap-3 md:gap-5'>
             <Link href="/create-prompt" className='black_btn'>
@@ -51,7 +52,7 @@ const Nav = () => {
 
             <Link href="/profile">
               <Image
-                src="/assets/images/logo.svg"
+                src={session.user.image}
                 alt='PromptShare Logo'
                 width={30}
                 height={30}
@@ -61,6 +62,7 @@ const Nav = () => {
           </div>
         ) : (
           <>
+            {/* show different provides button */}
             {providers && Object.values(providers).map((provider) => (
               <button
                 type='button'
@@ -81,7 +83,7 @@ const Nav = () => {
         {session?.user ? (
           <div className='flex'>
             <Image
-              src="/assets/images/logo.svg"
+              src={session.user.image}
               alt='profile'
               width={37}
               height={37}
@@ -95,7 +97,7 @@ const Nav = () => {
                   className='dropdown_link'
                   onClick={() => setToggleDropdown(false)}
                 >
-                  Profile
+                  My Profile
                 </Link>
                 <Link
                   href="/create-prompt"

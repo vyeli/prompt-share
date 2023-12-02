@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
 });
 
 // If the model User has already been compiled, Mongoose will return it. Otherwise, Mongoose will compile the model and return it.
-const User = mongoose.models && mongoose.models.User ? mongoose.models.User : mongoose.model('User', userSchema);
+const User = mongoose.models.User || mongoose.model('User', userSchema);
 
 export default User;
 // models is a dictionary of all your models, so you can use it to check if a model exists before defining it

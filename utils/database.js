@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 let isConnected = false
 
 export const connectToDB = async () => {
-    mongoose.set("strictQuery", true)
+    mongoose.set("strictQuery", true) // throws error if you try to query a field that doesn't exist in the schema
 
     if(isConnected) {
         console.log("MongoDB is already connected")
